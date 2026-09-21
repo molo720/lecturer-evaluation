@@ -1,0 +1,16 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Python: Lecturer Evaluation System",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "${workspaceFolder}/app.py",
+            "console": "integratedTerminal",
+            "python": "${workspaceFolder}/venv312/Scripts/python.exe",
+            "env": {
+                "FLASK_ENV": "development"
+            }
+        }
+    ]
+}
