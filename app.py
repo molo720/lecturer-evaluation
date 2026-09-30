@@ -31,6 +31,9 @@ from core.optimizations import (
 )
 
 MIN_PASSWORD_LENGTH = 6
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+METRICS_PATH = os.path.join(BASE_DIR, 'data', 'model_evaluation_metrics.json')
+ON_RAILWAY = bool(os.environ.get('RAILWAY_ENVIRONMENT') or os.environ.get('RAILWAY_PROJECT_ID'))
 
 app = Flask(__name__)
 app.secret_key = os.environ.get('SECRET_KEY') or (
@@ -42,7 +45,7 @@ app.config['DATABASE'] = DATABASE_PATH
 app.config['WTF_CSRF_TIME_LIMIT'] = None
 app.config['SESSION_COOKIE_HTTPONLY'] = True
 app.config['SESSION_COOKIE_SAMESITE'] = 'Lax'
-app.config['SESSION_COOKIE_SECURE'] = bool(os.environ.get('VERCEL'))
+app.config['SESSION_COOKIE_SECURE'] = bool(os.environ.get('VERCEL')) or ON_RAILWAY
 app.config['MAX_CONTENT_LENGTH'] = 8 * 1024 * 1024
 
 csrf = CSRFProtect(app)
